@@ -333,7 +333,8 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
     */
     open var keyboardAppearance = UIKeyboardAppearance.default
 
-    
+    open var responderSuperView: UIView?
+
     ///-----------------------------------------------------------
     /// MARK: UITextField/UITextView Next/Previous/Resign handling
     ///-----------------------------------------------------------
@@ -2021,7 +2022,10 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 break
             }
         }
-    
+        if (responderSuperView != nil) {
+            return responderSuperView?.deepResponderViews()
+        }
+
     //If there is a superConsideredView in view's hierarchy, then fetching all it's subview that responds. No sorting for superConsideredView, it's by subView position.    (Enhancement ID: #22)
         if superConsideredView != nil {
             return superConsideredView?.deepResponderViews()
